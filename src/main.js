@@ -28,7 +28,8 @@ Vue.filter('dateFormat', function (dataStr, pattern='YYYY-MM-DD HH:mm:ss') {
 import axios from 'axios'
 //把 `axios` 加到 `Vue` 的原型中
 Vue.prototype.axios = axios;
-axios.defaults.baseURL = 'http://120.77.181.41:3000/api'
+axios.defaults.baseURL = 'http://120.77.181.41:3000/api'; 
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 
 // 导入 MUI 的样式
@@ -50,9 +51,6 @@ import router from './router.js'
 
 // 导入 App 根组件
 import app from './App.vue'
-
-
-
 
 
 

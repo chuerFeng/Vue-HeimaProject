@@ -66,3 +66,43 @@
 2. 点击加载更多，让 pageIndex++ , 然后重新调用 this.getComments() 方法重新获取最新一页的数据
 3. 为了防止 新数据 覆盖老数据的情况，我们在 点击加载更多的时候，每当获取到新数据，应该让 老数据 调用 数组的 concat 方法，拼接上新数组
 
+## 发表评论
+1. 把文本框做双向数据绑定
+2. 为发表按钮绑定一个事件
+3. 校验评论内容是否为空，如果为空，则Toast提示用户 评论内容不能为空
+4. 通过 vue-resource 发送一个请求，把评论内容提交给 服务器
+5. 当发表评论OK后，重新刷新列表，以查看最新的评论
+ + 如果调用 getComments 方法重新刷新评论列表的话，可能只能得到 最后一页的评论，前几页的评论获取不到
+ + 换一种思路： 当评论成功后，在客户端，手动拼接出一个 最新的评论对象，然后 调用 数组的 unshift 方法， 把最新的评论，追   加到  data 中 comments 的开头；这样，就能 完美实现刷新评论列表的需求；
+
+## 改造图片分析 按钮为 路由的链接并显示对应的组件页面
+
+## 绘制 图片列表 组件页面结构并美化样式
+1. 制作 顶部的滑动条
+2. 制作 底部的图片列表
+3. 滑动条无法正常触发，该组件是js组件，需要初始化
+ + 导入 mui.js
+ + 调用官方提供的方法去初始化
+ ```
+ mui('.mui-scroll-wrapper').scroll({
+   deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+ });
+
+ ```
+4. 初始化 滑动条时，导入的mui.js 报`Uncaught TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode`错
+ + 经过推测，可能是 mui.js 中使用了 'caller', 'callee', and 'arguments'，webpack打包好的bundle.js中，默认是启用严格模式，所以两者冲突了
+ + 解决方案：1. 把mui.js中的非严格模式的代码改掉  2. 把webpack的严格模式禁用掉
+ + 禁用webpack的严格模式 `npm install babel-plugin-transform-remove-strict-mode`
+  ```
+  .babelrc
+
+  {
+    "plugins": ["transform-remove-strict-mode"]
+  }
+  ```
+  + 滑动的时候报警告：`Unable to preventDefault inside passive event listener due to target being treated as passive. See https://www.chromestatus.com/features/5093566007214080`
+
+  ```
+  解决方法，可以加上* { touch-action: pan-y; } 这句样式去掉。
+  ```
+5. 刚进入 图片分享页面的时候 滑动条无法正常工作 经过分析发现 如果要初始化滑动条，得要等到 DOM 元素加载完成，所以
