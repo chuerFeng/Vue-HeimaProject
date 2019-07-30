@@ -59,7 +59,7 @@ export default {
           if (response.data.status === 1) {
             //  成功了
             this.lunbotuList = response.data.imgs
-            console.log(response.data.imgs)
+            // console.log(response.data.imgs)
           }else{
             // 失败的
             Toast("加载轮播图失败。。。");
