@@ -35,7 +35,7 @@ export default {
   methods: {
     getNewsList() {
     
-      this.axios.get('/getnews', {
+      this.axios.get('/getnewslist', {
         params:{
           pageIdx: 1
         }

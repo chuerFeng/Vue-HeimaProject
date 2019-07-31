@@ -16,7 +16,7 @@
     <div>
       <ul class="photo-list">
         <li v-for="(item, i) in list" :key="i"> 
-          <router-link tag="div" class="imgWrap" v-for="(poh, j) in item.phos" :key="j"  :to="'/home/photo/'+ item.phoId">
+          <router-link tag="div" class="imgWrap" v-for="(poh, j) in item.phos" :key="j"  :to="'/home/photoinfo/'+ item.phoId">
             <img  v-lazy="poh">
             <span style="position: absolute; bottom:0">{{ item.intro }}</span>   
           </router-link>         

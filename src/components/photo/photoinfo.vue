@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>标题</h3>
+    <h3>{{ photoinfo.intro }}</h3>
     <p class="subtitle">
       <span>发表时间</span>
       <span>点击次数：0</span>
@@ -15,19 +15,30 @@
     </div>
 
   </div>  
-</template>
+</template> 
 
 
 <script>
 export default {
   data() {
     return {
-      id: this.$route.params.id
+      id: this.$route.params.id,
+      photoinfo: {}
     }
+  },
+  created() {
+    this.getPhotoInfo()
   },
   methods: {
     getPhotoInfo(){
-      // this.axios.
+      this.axios.get('getphodetail', {
+        params: {
+          'phoId': this.id
+        }
+      }).then((res) => {
+        this.photoinfo = res.data.pho
+        console.log(this.photoinfo)
+      })
     }
   },
 }

@@ -7,7 +7,6 @@ Vue.use(VueRouter)
 
 // 导入格式化时间的插件
 // import moment, { months } from 'moment'
-// // 定义全局的过滤器
 // // Vue.filter('dateFormat', function (dataStr, pattern = "YYYY-MM-DD HH:mm:ss") {
 // //   return moment(dataStr).format(pattern)
 // // })
@@ -15,6 +14,8 @@ Vue.use(VueRouter)
 //   return moment(dataStr).format(pattern)
 // })
 
+
+// 定义全局的过滤器
 import moment, { months } from 'moment'
 Vue.filter('dateFormat', function (dataStr, pattern='YYYY-MM-DD HH:mm:ss') {
   return moment(dataStr).format(pattern)
@@ -28,7 +29,7 @@ Vue.filter('dateFormat', function (dataStr, pattern='YYYY-MM-DD HH:mm:ss') {
 import axios from 'axios'
 //把 `axios` 加到 `Vue` 的原型中
 Vue.prototype.axios = axios;
-axios.defaults.baseURL = 'http://120.77.181.41:3000/api'; 
+axios.defaults.baseURL = 'http://www.liulongbin.top:3005/api'; 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 
