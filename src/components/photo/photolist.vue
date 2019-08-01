@@ -30,6 +30,7 @@
 <script>
 import { Toast } from 'mint-ui'
 import mui from '../../lib/mui/js/mui.js'
+
 export default {
   data() {
     return {
@@ -65,8 +66,7 @@ export default {
           'pageIdx': cateId
         }
       })
-      .then( res => {
-        // console.log(res);
+      .then( (res) => {
         if (res.data.status === 1) {
           this.list = res.data.phos
 
@@ -82,9 +82,7 @@ export default {
 
 
 <style lang="scss" scoped>
-  * { touch-action: pan-y; } 
-
-  
+  * { touch-action: pan-y; }  
 
   .photo-list{
     list-style: none;
@@ -128,7 +126,6 @@ export default {
       background-color: #6666;
     }
   }
-
 
   
   .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {

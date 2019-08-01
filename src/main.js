@@ -7,13 +7,6 @@ Vue.use(VueRouter)
 
 // 导入格式化时间的插件
 // import moment, { months } from 'moment'
-// // Vue.filter('dateFormat', function (dataStr, pattern = "YYYY-MM-DD HH:mm:ss") {
-// //   return moment(dataStr).format(pattern)
-// // })
-// Vue.filter('dataFormat', function (dataStr, pattern = 'YYYY-MM-DD HH:mm:ss  ') {
-//   return moment(dataStr).format(pattern)
-// })
-
 
 // 定义全局的过滤器
 import moment, { months } from 'moment'

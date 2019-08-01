@@ -5,7 +5,7 @@
     <!-- 子标题 -->
     <p class="subtitle">
       <span>发表时间：{{ newsinfo.add_time | dateFormat }}</span>
-      <span>点击：{{ newsinfo.clicked }}次</span>
+      <span>点击：{{ newsinfo.click }}次</span>
     </p>
 
     <hr>
@@ -37,16 +37,10 @@
     },
     methods: {
       getNewInfo() {
-        this.axios.get('getnewsdetail' ,{
-          params: {
-            newsId: this.id
-          }
-        })
+        this.axios.get('getnew/'+ this.id)
         .then((res) => {
-          this.newsinfo = res.data.news
-          // console.log(res.data.news);
-          console.log( this.newsinfo );
-                    
+          this.newsinfo = res.data.message[0]
+          console.log( res );                    
         })
       }
     },

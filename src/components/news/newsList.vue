@@ -2,14 +2,14 @@
   <div>
     
     <ul class="mui-table-view">
-       <li class="mui-table-view-cell mui-media" v-for="(news) in newslist" :key="news._id" tag="li">
-        <router-link :to="'/home/newslist/' + news.id">
+       <li class="mui-table-view-cell mui-media" v-for="(news) in newslist" :key="news.id" tag="li">
+        <router-link :to="'/home/newsinfo/' + news.id">
           <img class="mui-media-object mui-pull-left" :src="news.img_url">
           <div class="mui-media-body">
             <h1>{{ news.title }}</h1> 
             <p class="mui-ellipsis">              
               <span>发表时间: {{ news.add_time | dateFormat }}</span>              
-              <span>点击数: {{ news.clicked }} 次</span>              
+              <span>点击数: {{ news.click }} 次</span>              
             </p>
           </div>
         </router-link>
@@ -34,18 +34,19 @@ export default {
   },
   methods: {
     getNewsList() {
-    
-      this.axios.get('/getnewslist', {
-        params:{
-          pageIdx: 1
-        }
-      }).then((res) => {
-          this.newslist = JSON.parse(res.data.news)
-          console.log(this.newslist);                         
-        
-      }).catch((err) => {
+      this.axios.get('/getnewslist')
+        .then((res) => {
+          console.log(res)
 
-      })
+          if (res.data.status === 0) {
+            this.newslist = res.data.message
+          }else{
+            Toast('没有更多资讯咯')
+          }
+        })
+        .catch((err) => {
+            Toast('资讯获取失败')
+        })
     }
   }
 

@@ -1,18 +1,19 @@
 <template>
-  <div class="app-container">
+	<div class="app-container">
 
-    <!-- 顶部 Header 区域 -->
-    <mt-header fixed title="Vue 案例"></mt-header>
+		<!-- 顶部 Header 区域 -->
+		<mt-header fixed title="Vue 案例">
+			  <mt-button @click="setBack" icon="back" slot="left"></mt-button>
+		</mt-header>
 
-
-    <!-- 中间的 路由 router-view 区域 -->
+		<!-- 中间的 路由 router-view 区域 -->
 		<transition>
 			<router-view></router-view>
 		</transition>
 
 
-    <!-- 底部 Tabbar 区域 -->
-    <nav class="mui-bar mui-bar-tab">
+		<!-- 底部 Tabbar 区域 -->
+		<nav class="mui-bar mui-bar-tab">
 			<router-link class="mui-tab-item-bll" to="/home">
 				<span class="mui-icon mui-icon-home"></span>
 				<span class="mui-tab-label">首页</span>
@@ -33,70 +34,86 @@
 			</router-link>
 		</nav>
 
-  </div>
+	</div>
 </template>
 
 <script>
+export default {
+	data() {
+		return {
+			
+		}
+	},
+	methods: {
+		setBack(){
+			this.$router.back(1)
+		}
+	},
+}
 </script>
 
 
+
 <style lang="scss" scoped>
+	.mui-tab-item-bll {
+		display: table-cell;
+		overflow: hidden;
+		width: 1%;
+		height: 50px;
+		text-align: center;
+		vertical-align: middle;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		color: #929292;
 
-.mui-tab-item-bll{
-	display: table-cell;
-	overflow: hidden;
-	width: 1%;
-	height: 50px;
-	text-align: center;
-	vertical-align: middle;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	color: #929292;
+		.mui-icon {
+			top: 3px;
+			width: 24px;
+			height: 24px;
+			padding-top: 0;
+			padding-bottom: 0;
+		}
 
-	.mui-icon {
-    top: 3px;
-    width: 24px;
-    height: 24px;
-    padding-top: 0;
-    padding-bottom: 0;
+		.mui-icon~.mui-tab-label {
+			font-size: 11px;
+			display: block;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		&.mui-active {
+			color: #007aff;
+		}
 	}
 
-	.mui-icon~.mui-tab-label {
-    font-size: 11px;
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
+	.mint-header.is-fixed {
+		z-index: 5;
 	}
-	
-	&.mui-active{
-    color: #007aff;
+
+
+	.app-container {
+		padding-top: 40px;
+		padding-bottom: 50px;
+		overflow-x: hidden;
+
+		.mint-button-text {
+			margin-top: 2px;
+		}
 	}
-}
 
-.mint-header.is-fixed{
-	z-index: 5;
-}
+	.v-enter {
+		opacity: 0;
+		transform: translateX(100%);
+	}
 
+	.v-leave-to {
+		opacity: 0;
+		transform: translateX(-100%);
+		position: absolute;
+	}
 
-.app-container {
-  padding-top: 40px;
-	padding-bottom: 50px;
-  overflow-x: hidden;
-}
-
-.v-enter {
-  opacity: 0;
-  transform: translateX(100%);
-}
-
-.v-leave-to {
-  opacity: 0;
-  transform: translateX(-100%);
-  position: absolute;
-}
-
-.v-enter-active,
-.v-leave-active {
-  transition: all 0.5s ease;
-}
+	.v-enter-active,
+	.v-leave-active {
+		transition: all 0.5s ease;
+	}
 </style>
