@@ -143,3 +143,25 @@
 3. 打开自己的 项目中 package.json 文件，在 dev 脚本中，添加一个 --host 指令， 把 当前 电脑的 WIFI IP地址， 设置为 --host 的指令值；
  + 如何查看自己电脑所处 WIFI 的IP呢， 在 cmd 终端中运行 `ipconfig` ， 查看 无线网的 ip 地址
 
+
+## 实现 商品购买列表
+1. 实现加载更多
+
+## 实现点击列表跳转到商品详细
+
+## 商品详细页面布局美化
+1. 抽离 轮播图 成组件，子组件声明props 用接收父组件传的值, 父组件使用components注册轮播图组件 并通过属性绑定: 向子组件传值
+2. 给轮播图组件设置 class 属性 用于判断是否需要让轮播图片宽度100%，轮播图组件使用 :class({'full': isfull}),isfull的值通过父组件传值过来
+3. 使用 mintUI 的卡片组件
+  ```
+  <div class="mui-card">
+    <div class="mui-card-header">页眉</div>
+    <div class="mui-card-content">
+      <div class="mui-card-content-inner">
+        <p>内容</p>
+      </div>
+    </div>
+    <div class="mui-card-footer">页脚</div>      
+  </div>
+  ```
+
