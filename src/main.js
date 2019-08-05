@@ -2,34 +2,35 @@
 import Vue from 'vue'
 // 1.1 导入路由的包
 import VueRouter from 'vue-router'
-// 1.2 安装路由
-Vue.use(VueRouter)
-
+// 导入 vuex 状态管理
+import Vuex from 'vuex'
 // 导入格式化时间的插件
-// import moment, { months } from 'moment'
+import moment, { months } from 'moment'
+// 2.1 导入 axios
+import axios from 'axios'
+
+// 导入 MUI 的样式
+import './lib/mui/css/mui.min.css'
+// 导入扩展图标样式
+import './lib/mui/css/icons-extra.css'
+
+// 安装路由
+Vue.use(VueRouter)
+Vue.use(Vuex)
+
 
 // 定义全局的过滤器
-import moment, { months } from 'moment'
 Vue.filter('dateFormat', function (dataStr, pattern='YYYY-MM-DD HH:mm:ss') {
   return moment(dataStr).format(pattern)
 })
 
 
-// import vueResource from 'vue-resource'
-// Vue.use(vueResource)
-
-// 2.1 导入 axios
-import axios from 'axios'
 //把 `axios` 加到 `Vue` 的原型中
 Vue.prototype.axios = axios;
 axios.defaults.baseURL = 'http://www.liulongbin.top:3005/api'; 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 
-// 导入 MUI 的样式
-import './lib/mui/css/mui.min.css'
-// 导入扩展图标样式
-import './lib/mui/css/icons-extra.css'
 
 
 // 按需导入 Mint-UI 中的组件   
@@ -48,9 +49,47 @@ import router from './router.js'
 import app from './App.vue'
 
 
+var store = new Vuex.Store({
+  state: {
+    cart: []
+  },
+  mutations: {
+    addToCar(state, goodsinfo){
+      // 分析：
+      // 如果购物车中，之前就已经有这个对应的商品，那么只需要更新数量
+      // 如果没有，则直接把商品数据 push 到 car 中
+      var flag = false
+
+      state.cart.some( item => {
+        console.log('item:' + item);
+        
+        if (item.id == goodsinfo.id) {
+          item.count += parseInt(goodsinfo.count)
+          flag = true
+          return true          
+        }
+      })
+
+      if(!flag) {
+        state.cart.push(goodsinfo)
+      }
+    }
+  },
+  getters: {
+    getAllCount(state) {
+      let c = 0;
+      state.cart.forEach( item => {
+        c += item.count
+      })    
+      return c
+    }
+  }
+})
+
 
 var vm = new Vue({
   el: '#app',
   render: c => c(app),
-  router // 1.4 挂载路由对象到 VM 实例上
+  router, // 1.4 挂载路由对象到 VM 实例上
+  store
 })
