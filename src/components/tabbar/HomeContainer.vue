@@ -51,7 +51,6 @@ export default {
       // 获取轮播图数据的方法
       this.axios.get('/getlunbo')
         .then( (result) => {     
-          console.log(result)     
           if (result.data.status === 0) {
           // 成功了
             this.lunbotuList = result.data.message;

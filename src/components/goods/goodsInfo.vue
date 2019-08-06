@@ -100,7 +100,6 @@ export default {
       .then( (res) => {
         if (res.data.status === 0) {          
           this.goodsInfo = res.data.message[0]
-          console.log(this.goodsInfo);                
         }else{
           Toast('数据加载失败')
         }
@@ -160,7 +159,7 @@ export default {
     afterEnter(el) {
       this.ballFlag = !this.ballFlag;
     },
-    getSelectCount(countNum){
+    getSelectCount(countNum){ 
       this.selectCound = countNum
     }
   },

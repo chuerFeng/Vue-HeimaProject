@@ -31,14 +31,13 @@ axios.defaults.baseURL = 'http://www.liulongbin.top:3005/api';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 
-
-
 // 按需导入 Mint-UI 中的组件   
-import { Header, Swipe, SwipeItem, Button, Lazyload } from 'mint-ui'
+import { Header, Swipe, SwipeItem, Button, Lazyload, Switch } from 'mint-ui'
 Vue.component(Header.name, Header)
 Vue.component(Swipe.name, Swipe)
 Vue.component(SwipeItem.name, SwipeItem)
 Vue.component(Button.name, Button)
+Vue.component(Switch.name, Switch);
 Vue.use(Lazyload)
 
 
@@ -61,7 +60,7 @@ var store = new Vuex.Store({
       var flag = false
 
       state.cart.some( item => {
-        console.log('item:' + item);
+        // console.log('item:' + item);
         
         if (item.id == goodsinfo.id) {
           item.count += parseInt(goodsinfo.count)
@@ -82,7 +81,17 @@ var store = new Vuex.Store({
         c += item.count
       })    
       return c
+    },
+
+    getGoodsCount(state) {
+      let goodsCount = []
+      state.cart.forEach( v => {        
+        goodsCount[v.id] = v.count
+      })
+      return goodsCount
     }
+
+
   }
 })
 

@@ -42,7 +42,6 @@ export default {
         })
         .then( res => {
           if (res.data.status === 0) {
-            console.log(res.data.message)
             this.goodsInfos = this.goodsInfos.concat(res.data.message)
           }
         })
