@@ -11,6 +11,7 @@ import axios from 'axios'
 
 // 导入 MUI 的样式
 import './lib/mui/css/mui.min.css'
+import './lib/mui/css/mui.css'
 // 导入扩展图标样式
 import './lib/mui/css/icons-extra.css'
 
@@ -72,6 +73,24 @@ var store = new Vuex.Store({
       if(!flag) {
         state.cart.push(goodsinfo)
       }
+    },
+    updateCar(state, goodsinfo) {
+      
+      state.cart.some( item => {
+
+        if (item.id == goodsinfo.id) {
+          item.count = parseInt(goodsinfo.count)
+        }
+      })
+      return true  
+    },
+    deletCart(state, goodsinfo){      
+      
+      let index = state.cart.findIndex( (val) => {      
+        return val.id == goodsinfo.id
+      })
+      
+      state.cart.splice(index, 1)
     }
   },
   getters: {
@@ -90,8 +109,6 @@ var store = new Vuex.Store({
       })
       return goodsCount
     }
-
-
   }
 })
 
